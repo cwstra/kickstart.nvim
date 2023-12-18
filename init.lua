@@ -268,6 +268,15 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 
   { 'rescript-lang/vim-rescript', ft = "rescript" },
+  'reasonml-editor/vim-reason-plus',
+  {
+    'JManch/sunset.nvim',
+    lazy = false,
+    opts = {
+      latitude = 40.03297,
+      longitude = -75.631538
+    }
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -424,7 +433,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ocaml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -516,6 +525,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
@@ -568,9 +578,12 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  ocamllsp = {},
   rescriptls = {},
+  reason_ls = {},
+
 
   lua_ls = {
     Lua = {
